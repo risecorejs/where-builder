@@ -1,0 +1,19 @@
+{
+  "name": "@risecorejs/where-builder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "middleware.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/risecorejs/where-builder.git"
+  },
+  "author": "Amenov Abdulsalam <risecorejs@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/risecorejs/where-builder/issues"
+  },
+  "homepage": "https://github.com/risecorejs/where-builder#readme",
+  "devDependencies": {
+    "prettier": "^2.3.2"
+  }
+}
