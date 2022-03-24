@@ -1,18 +1,12 @@
-const WhereBuilder = require(__dirname + '/Where-Builder')
+const whereBuilder = require('./index')
 
 module.exports = () => (req, res, next) => {
-  req.whereBuilder = (abstractions) => {
-    try {
-      const whereBuilder = new WhereBuilder(req.query, abstractions)
-
-      whereBuilder.run()
-
-      return whereBuilder.where
-    } catch (err) {
-      console.log(err)
-
-      return {}
+  req.whereBuilder = (...abstractions) => {
+    if (Array.isArray(abstractions[0])) {
+      abstractions = abstractions[0]
     }
+
+    return whereBuilder(req.query, abstractions)
   }
 
   next()
