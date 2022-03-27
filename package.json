@@ -2,7 +2,7 @@
   "name": "@risecorejs/where-builder",
   "version": "1.1.0",
   "description": "",
-  "main": "middleware.js",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/risecorejs/where-builder.git"
@@ -15,5 +15,8 @@
   "homepage": "https://github.com/risecorejs/where-builder#readme",
   "devDependencies": {
     "prettier": "^2.3.2"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
   }
 }
