@@ -41,14 +41,12 @@ module.exports = (query, abstractions) => {
         } else if (typeof secondElement === 'function') {
           const [whereKey, handler] = abstraction
 
-          const { has, value } = getValueByQueryKey(query, whereKey)
+          const { value } = getValueByQueryKey(query, whereKey)
 
-          if (has) {
-            const result = handler(value)
+          const result = handler(value)
 
-            if (result !== void 0) {
-              where[whereKey] = result
-            }
+          if (result !== void 0) {
+            where[whereKey] = result
           }
         }
       } else if (abstraction.length === 3) {
