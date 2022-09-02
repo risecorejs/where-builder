@@ -15,7 +15,7 @@ export default function (query: IFields, keys: TKeys): IFields {
   for (const key of keys) {
     // IS-STRING
     if (typeof key === 'string') {
-      const whereKeyQueryKey = key
+      const whereKeyQueryKey = <string>key
 
       const { has, value } = getValueByQueryKey(query, whereKeyQueryKey)
 
