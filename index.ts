@@ -107,12 +107,9 @@ export default function (query: IFields, keys: TKeys): IFields {
 
 /**
  * GET-VALUE-BY-QUERY-KEY
- * @param query {object}
+ * @param query {IFields}
  * @param key {string}
- * @returns {{
- *   has: boolean,
- *   value: void|any
- * }}
+ * @returns {IResult}
  */
 function getValueByQueryKey(query: IFields, key: string): IResult {
   const result: IResult = {

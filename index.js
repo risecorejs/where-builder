@@ -90,12 +90,9 @@ function default_1(query, keys) {
 exports.default = default_1;
 /**
  * GET-VALUE-BY-QUERY-KEY
- * @param query {object}
+ * @param query {IFields}
  * @param key {string}
- * @returns {{
- *   has: boolean,
- *   value: void|any
- * }}
+ * @returns {IResult}
  */
 function getValueByQueryKey(query, key) {
     const result = {
