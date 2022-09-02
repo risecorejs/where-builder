@@ -7,7 +7,7 @@ import { TKeys } from './types'
  * WHERE-BUILDER
  * @param query {IFields}
  * @param keys {TKeys}
- * @returns {object}
+ * @return {object}
  */
 export default function (query: IFields, keys: TKeys): object {
   const where: IFields = {}
@@ -109,7 +109,7 @@ export default function (query: IFields, keys: TKeys): object {
  * GET-VALUE-BY-QUERY-KEY
  * @param query {IFields}
  * @param key {string}
- * @returns {IResult}
+ * @return {IResult}
  */
 function getValueByQueryKey(query: IFields, key: string): IResult {
   const result: IResult = {

@@ -8,7 +8,7 @@ const lodash_1 = __importDefault(require("lodash"));
  * WHERE-BUILDER
  * @param query {IFields}
  * @param keys {TKeys}
- * @returns {object}
+ * @return {object}
  */
 function default_1(query, keys) {
     const where = {};
@@ -92,7 +92,7 @@ exports.default = default_1;
  * GET-VALUE-BY-QUERY-KEY
  * @param query {IFields}
  * @param key {string}
- * @returns {IResult}
+ * @return {IResult}
  */
 function getValueByQueryKey(query, key) {
     const result = {
