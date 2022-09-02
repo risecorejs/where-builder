@@ -9,7 +9,7 @@ import whereBuilder from './index'
  */
 export default function (): express.Handler {
   return function (req: express.Request, res: express.Response, next: express.NextFunction) {
-    req.whereBuilder = (...keys: TKeys) => {
+    req.whereBuilder = (...keys: TKeys): object => {
       if (Array.isArray(keys[0])) {
         keys = <TKeys>keys[0]
       }
