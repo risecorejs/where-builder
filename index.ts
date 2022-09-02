@@ -15,12 +15,12 @@ export default function (query: IFields, keys: TKeys): IFields {
   for (const key of keys) {
     // IS-STRING
     if (typeof key === 'string') {
-      const whereKey_queryKey = key
+      const whereKeyQueryKey = key
 
-      const { has, value } = getValueByQueryKey(query, whereKey_queryKey)
+      const { has, value } = getValueByQueryKey(query, whereKeyQueryKey)
 
       if (has) {
-        where[whereKey_queryKey] = value
+        where[whereKeyQueryKey] = value
       }
     }
 
@@ -30,7 +30,7 @@ export default function (query: IFields, keys: TKeys): IFields {
       if (key.length === 2) {
         // IS-STRING
         if (typeof key[1] === 'string') {
-          const [whereKey, queryKey] = key
+          const [whereKey, queryKey] = <[string, string]>key
 
           const { has, value } = getValueByQueryKey(query, queryKey)
 
@@ -40,49 +40,49 @@ export default function (query: IFields, keys: TKeys): IFields {
         }
 
         // IS-OBJECT
-        else if (key[1].constructor === Object) {
-          const [whereKey_queryKey, object] = key
+        else if (typeof key[1] === 'object' && key[1].constructor === Object) {
+          const [whereKeyQueryKey, obj] = <[string, object]>key
 
-          const { has } = getValueByQueryKey(query, whereKey_queryKey)
+          const { has } = getValueByQueryKey(query, whereKeyQueryKey)
 
           if (has) {
-            where[whereKey_queryKey] = object
+            where[whereKeyQueryKey] = obj
           }
         }
 
         // IS-FUNCTION
         else if (typeof key[1] === 'function') {
-          const [whereKey, handler] = key
+          const [whereKeyQueryKey, func] = <[string, (val: any) => any]>key
 
-          const { value } = getValueByQueryKey(query, whereKey)
+          const { value } = getValueByQueryKey(query, whereKeyQueryKey)
 
-          const result = handler(value)
+          const result = func(value)
 
           if (result !== void 0) {
-            where[whereKey] = result
+            where[whereKeyQueryKey] = result
           }
         }
       }
 
       // IS-3
       else if (key.length === 3) {
-        const [whereKey, queryKey, objectOrHandler] = key
+        const [whereKey, queryKey, objOrFunc] = <[string, string, object | ((val: any) => any)]>key
 
         const { has, value } = getValueByQueryKey(query, queryKey)
 
         if (has) {
           // IS-OBJECT
-          if (objectOrHandler.constructor === Object) {
-            if (whereKey === null) {
-              Object.assign(where, objectOrHandler)
+          if (typeof objOrFunc === 'object' && objOrFunc.constructor === Object) {
+            if (whereKey === null || whereKey === void 0) {
+              Object.assign(where, objOrFunc)
             } else {
-              where[whereKey] = objectOrHandler
+              where[whereKey] = objOrFunc
             }
           }
 
           // IS-FUNCTION
-          else if (typeof objectOrHandler === 'function') {
-            const result = objectOrHandler(value)
+          else if (typeof objOrFunc === 'function') {
+            const result = objOrFunc(value)
 
             if (result !== void 0) {
               if (whereKey === null) {
@@ -97,7 +97,7 @@ export default function (query: IFields, keys: TKeys): IFields {
     }
 
     // IS-OBJECT
-    else if (key.constructor === Object) {
+    else if (typeof key === 'object' && key.constructor === Object) {
       Object.assign(where, key)
     }
   }
