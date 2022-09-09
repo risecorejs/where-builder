@@ -13,7 +13,7 @@ const lodash_1 = __importDefault(require("lodash"));
 function default_1(query, keys) {
     const where = {};
     for (const key of keys) {
-        // IS-STRING
+        // IS::STRING
         if (typeof key === 'string') {
             const whereKeyQueryKey = key;
             const { has, value } = getValueByQueryKey(query, whereKeyQueryKey);
@@ -21,11 +21,11 @@ function default_1(query, keys) {
                 where[whereKeyQueryKey] = value;
             }
         }
-        // IS-ARRAY
+        // IS::ARRAY
         else if (Array.isArray(key)) {
-            // IS-2
+            // IS::2
             if (key.length === 2) {
-                // IS-STRING
+                // IS::STRING
                 if (typeof key[1] === 'string') {
                     const [whereKey, queryKey] = key;
                     const { has, value } = getValueByQueryKey(query, queryKey);
@@ -33,7 +33,7 @@ function default_1(query, keys) {
                         where[whereKey] = value;
                     }
                 }
-                // IS-OBJECT
+                // IS::OBJECT
                 else if (typeof key[1] === 'object' && key[1].constructor === Object) {
                     const [whereKeyQueryKey, obj] = key;
                     const { has } = getValueByQueryKey(query, whereKeyQueryKey);
@@ -41,7 +41,7 @@ function default_1(query, keys) {
                         where[whereKeyQueryKey] = obj;
                     }
                 }
-                // IS-FUNCTION
+                // IS::FUNCTION
                 else if (typeof key[1] === 'function') {
                     const [whereKeyQueryKey, func] = key;
                     const { value } = getValueByQueryKey(query, whereKeyQueryKey);
@@ -51,12 +51,12 @@ function default_1(query, keys) {
                     }
                 }
             }
-            // IS-3
+            // IS::3
             else if (key.length === 3) {
                 const [whereKey, queryKey, objOrFunc] = key;
                 const { has, value } = getValueByQueryKey(query, queryKey);
                 if (has) {
-                    // IS-OBJECT
+                    // IS::OBJECT
                     if (typeof objOrFunc === 'object' && objOrFunc.constructor === Object) {
                         if (whereKey === null || whereKey === void 0) {
                             Object.assign(where, objOrFunc);
@@ -65,7 +65,7 @@ function default_1(query, keys) {
                             where[whereKey] = objOrFunc;
                         }
                     }
-                    // IS-FUNCTION
+                    // IS::FUNCTION
                     else if (typeof objOrFunc === 'function') {
                         const result = objOrFunc(value);
                         if (result !== void 0) {
@@ -80,7 +80,7 @@ function default_1(query, keys) {
                 }
             }
         }
-        // IS-OBJECT
+        // IS::OBJECT
         else if (typeof key === 'object' && key.constructor === Object) {
             Object.assign(where, key);
         }

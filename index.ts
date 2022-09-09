@@ -13,7 +13,7 @@ export default function (query: IFields, keys: TKeys): object {
   const where: IFields = {}
 
   for (const key of keys) {
-    // IS-STRING
+    // IS::STRING
     if (typeof key === 'string') {
       const whereKeyQueryKey = <string>key
 
@@ -24,11 +24,11 @@ export default function (query: IFields, keys: TKeys): object {
       }
     }
 
-    // IS-ARRAY
+    // IS::ARRAY
     else if (Array.isArray(key)) {
-      // IS-2
+      // IS::2
       if (key.length === 2) {
-        // IS-STRING
+        // IS::STRING
         if (typeof key[1] === 'string') {
           const [whereKey, queryKey] = <[string, string]>key
 
@@ -39,7 +39,7 @@ export default function (query: IFields, keys: TKeys): object {
           }
         }
 
-        // IS-OBJECT
+        // IS::OBJECT
         else if (typeof key[1] === 'object' && key[1].constructor === Object) {
           const [whereKeyQueryKey, obj] = <[string, object]>key
 
@@ -50,7 +50,7 @@ export default function (query: IFields, keys: TKeys): object {
           }
         }
 
-        // IS-FUNCTION
+        // IS::FUNCTION
         else if (typeof key[1] === 'function') {
           const [whereKeyQueryKey, func] = <[string, (val: any) => any]>key
 
@@ -64,14 +64,14 @@ export default function (query: IFields, keys: TKeys): object {
         }
       }
 
-      // IS-3
+      // IS::3
       else if (key.length === 3) {
         const [whereKey, queryKey, objOrFunc] = <[string, string, object | ((val: any) => any)]>key
 
         const { has, value } = getValueByQueryKey(query, queryKey)
 
         if (has) {
-          // IS-OBJECT
+          // IS::OBJECT
           if (typeof objOrFunc === 'object' && objOrFunc.constructor === Object) {
             if (whereKey === null || whereKey === void 0) {
               Object.assign(where, objOrFunc)
@@ -80,7 +80,7 @@ export default function (query: IFields, keys: TKeys): object {
             }
           }
 
-          // IS-FUNCTION
+          // IS::FUNCTION
           else if (typeof objOrFunc === 'function') {
             const result = objOrFunc(value)
 
@@ -96,7 +96,7 @@ export default function (query: IFields, keys: TKeys): object {
       }
     }
 
-    // IS-OBJECT
+    // IS::OBJECT
     else if (typeof key === 'object' && key.constructor === Object) {
       Object.assign(where, key)
     }
