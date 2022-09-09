@@ -1,3 +1,7 @@
+.idea
+.prettierrc.json
+tsconfig.json
+
 # ignore the .ts files
 *.ts
 
