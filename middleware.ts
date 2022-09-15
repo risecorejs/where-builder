@@ -1,7 +1,10 @@
 import express from 'express'
 
-import { TKeys } from './types'
+import { WhereOptions } from 'sequelize'
+
 import whereBuilder from './index'
+
+import { TKeys } from './types'
 
 /**
  * MIDDLEWARE
@@ -9,7 +12,7 @@ import whereBuilder from './index'
  */
 export default function (): express.Handler {
   return function (req: express.Request, res: express.Response, next: express.NextFunction) {
-    req.whereBuilder = (...keys: TKeys): object => {
+    req.whereBuilder = (...keys: TKeys): WhereOptions => {
       if (Array.isArray(keys[0])) {
         keys = <TKeys>keys[0]
       }
@@ -24,7 +27,7 @@ export default function (): express.Handler {
 declare global {
   namespace Express {
     export interface Request {
-      whereBuilder(...keys: TKeys): object
+      whereBuilder(...keys: TKeys): WhereOptions
     }
   }
 }

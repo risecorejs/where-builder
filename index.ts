@@ -1,5 +1,7 @@
 import _ from 'lodash'
 
+import { WhereOptions } from 'sequelize'
+
 import { IFields, IResult } from './interfaces/index'
 import { TKeys } from './types'
 
@@ -7,10 +9,10 @@ import { TKeys } from './types'
  * WHERE-BUILDER
  * @param query {IFields}
  * @param keys {TKeys}
- * @return {object}
+ * @return {WhereOptions}
  */
-export default function (query: IFields, keys: TKeys): object {
-  const where: IFields = {}
+export default function (query: IFields, keys: TKeys): WhereOptions {
+  const where: WhereOptions = {}
 
   for (const key of keys) {
     // IS::STRING
