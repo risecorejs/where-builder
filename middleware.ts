@@ -12,7 +12,7 @@ import { TKeys } from './types'
  */
 export default function (): express.Handler {
   return function (req: express.Request, res: express.Response, next: express.NextFunction) {
-    req.whereBuilder = (...keys: TKeys): WhereOptions => {
+    req.whereBuilder = (...keys: TKeys | [TKeys]): WhereOptions => {
       if (Array.isArray(keys[0])) {
         keys = <TKeys>keys[0]
       }
@@ -27,7 +27,7 @@ export default function (): express.Handler {
 declare global {
   namespace Express {
     export interface Request {
-      whereBuilder(...keys: TKeys): WhereOptions
+      whereBuilder(...keys: TKeys | [TKeys]): WhereOptions
     }
   }
 }

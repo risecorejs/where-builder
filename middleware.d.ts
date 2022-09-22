@@ -9,7 +9,7 @@ export default function (): express.Handler;
 declare global {
     namespace Express {
         interface Request {
-            whereBuilder(...keys: TKeys): WhereOptions;
+            whereBuilder(...keys: TKeys | [TKeys]): WhereOptions;
         }
     }
 }
